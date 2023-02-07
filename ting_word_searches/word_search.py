@@ -23,4 +23,13 @@ def exists_word(word, instance):
 
 
 def search_by_word(word, instance):
-    """Aqui irá sua implementação"""
+    search = exists_word(word, instance)
+
+    for index, result in enumerate(search):
+        for occurence in result["ocorrencias"]:
+            file = instance.search(index)
+            occurence["conteudo"] = (
+                file["linhas_do_arquivo"][occurence["linha"] - 1]
+            )
+
+    return search
